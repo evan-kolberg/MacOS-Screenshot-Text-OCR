@@ -1,0 +1,5 @@
+pillow==9.5.0
+pyperclip==1.8.2
+pytesseract==0.3.10
+git+https://github.com/rawcsav/LaTeX-OCR.git
+pix2tex==0.1.2
