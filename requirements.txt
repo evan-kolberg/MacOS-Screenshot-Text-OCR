@@ -1,4 +1,4 @@
-pillow==9.5.0
+pillow==10.1.0
 pyperclip==1.8.2
 pytesseract==0.3.10
 git+https://github.com/rawcsav/LaTeX-OCR.git
