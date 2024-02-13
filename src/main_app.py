@@ -11,24 +11,25 @@ class GUI:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Screen Capture OCR")
-        self.root.geometry("450x250")
+        self.root.attributes("-topmost", True)
+        self.root.eval('tk::PlaceWindow . center')
+        self.root.resizable(False, False)
 
-        main_frame = ttk.Frame(self.root)
-        main_frame.pack(pady=10)
+        self.style = ttk.Style()
+        self.style.configure("LargeButton.TButton", font=("TkDefaultFont", 12))
 
-        ttk.Label(main_frame, text="Choose recognition mode:").grid(row=0, column=0, sticky="W", padx=(20, 0), columnspan=2)
+        button_frame = ttk.Frame(self.root)
+        button_frame.pack(fill=tk.BOTH, expand=True)
 
-        ttk.Button(main_frame, text="Text OCR", command=self.capture_and_copy_text).grid(row=1, column=0, padx=(20, 0), pady=5)
-        ttk.Button(main_frame, text="LaTeX OCR", command=self.capture_and_copy_latex).grid(row=1, column=1, padx=(10, 0), pady=5)
-
-
-        ttk.Button(main_frame, text="Clear Clipboard", command=self.reset_clipboard).grid(row=3, column=0, padx=(20, 0), pady=5, columnspan=2)
+        ttk.Button(button_frame, text="Text OCR", command=self.capture_and_copy_text, style="LargeButton.TButton").pack(side=tk.LEFT, padx=10, pady=10)
+        ttk.Button(button_frame, text="LaTeX OCR", command=self.capture_and_copy_latex, style="LargeButton.TButton").pack(side=tk.LEFT, padx=10, pady=10)
+        ttk.Button(button_frame, text="Clear Clipboard", command=self.reset_clipboard, style="LargeButton.TButton").pack(side=tk.LEFT, padx=10, pady=10)
 
         self.status_text = tk.StringVar()
-        ttk.Label(main_frame, textvariable=self.status_text).grid(row=4, column=0, sticky="W", padx=(20, 0), pady=5, columnspan=2)
+        self.status_text.trace_add("write", self.update_window_title)
+        self.update_window_title()
 
         self.root.bind("<Return>", lambda event: self.capture_and_copy_text())
-
 
     def copy_content(self, content, current_clipboard, is_latex=False):
         if is_latex:
@@ -50,7 +51,7 @@ class GUI:
             if recognized_content:
                 current_clipboard = pyperclip.paste()
                 self.copy_content(recognized_content, current_clipboard, is_latex=False)
-                self.status_text.set("Text recognized and appended to clipboard!")
+                self.status_text.set("Text recognized and copied")
 
     def capture_and_copy_latex(self):
         screenshot_file_path = capture_screen()
@@ -61,11 +62,14 @@ class GUI:
             if recognized_content:
                 current_clipboard = pyperclip.paste()
                 self.copy_content(recognized_content, current_clipboard, is_latex=True)
-                self.status_text.set("LaTeX recognized and appended to clipboard!")
+                self.status_text.set("LaTeX recognized and copied")
 
     def reset_clipboard(self):
         pyperclip.copy('')
-        self.status_text.set("Clipboard has been reset.")
+        self.status_text.set("Clipboard reset")
+
+    def update_window_title(self, *args):
+        self.root.title(self.status_text.get())
 
     def run(self):
         self.root.mainloop()
