@@ -47,7 +47,7 @@ python main_app.py
 5. Paste the extracted content into your preferred application.
 
 ## Demos
-- [Online Demo](https://rawcsav.com/macocr.html)
+- [Online Demo](https://rawcsav.com/projects/macocr.html)
 
 ## Limitations and Acknowledgement
 Thanks to Lukas Belcher and his foundational Latex model (https://github.com/lukas-blecher/LaTeX-OCR)!
