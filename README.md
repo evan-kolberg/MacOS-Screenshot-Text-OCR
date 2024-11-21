@@ -1,5 +1,14 @@
 # MacOS Screenshot OCR & LaTeX Model
 
+Merged Pull Request Additions:
+- Window is always on top -> If you focus on another application window, the OCR program window will stay on the topmost layer. Having to refocus the program window can often be annoying and waste time. 
+- Canvas is smaller and slimmer -> This allows users to put the app in the corner of the screen without compromising large amounts of screen real estate. 
+- Moved the on-click button messages to the window's title to keep the canvas size constant.
+
+![Screenshot 2024-02-13 at 11 35 33 AM](https://github.com/rawcsav/MacOS-Screenshot-Text-OCR/assets/70989484/b3a7c397-d772-459c-8f5e-fbb21c813c0f)
+![Screenshot 2024-02-13 at 11 34 37 AM](https://github.com/rawcsav/MacOS-Screenshot-Text-OCR/assets/70989484/5a800c6f-f189-44bd-b0f1-43db821135cf)
+
+
 This Python program extracts text and LaTeX code from screenshots, which can be useful when dealing with poorly formatted PDFs or complex scientific documents. The program leverages Optical Character Recognition (OCR) technology, temporary file management, and user-friendly GUI for streamlined and efficient text and LaTeX extraction.
 
 ## Features
